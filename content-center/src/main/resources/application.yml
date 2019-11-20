@@ -1,0 +1,82 @@
+# tomcat端口
+server:
+  port: 7000
+
+
+spring:
+  # 服务名
+  application:
+    name: content-center
+  # 数据源
+  datasource:
+    url: jdbc:mysql://localhost:3306/neti?useUnicode=true&characterEncoding=utf8&serverTimezone=GMT%2B8&useSSL=false&allowMultiQueries=true
+    hikari:
+      username: root
+      password: root
+      driver-class-name: com.mysql.cj.jdbc.Driver
+  cloud:
+    nacos:
+      discovery:
+        # 指定nacos server的地址
+        server-addr: localhost:8848
+        # 命名空间
+        namespace: a6250d04-817d-42ea-b7e1-cae7ae055ca6
+        # 集群名称 SZ
+        cluster-name: SZ
+        # 元数据
+        metadata:
+          instance: d
+    sentinel:
+      # 指定sentinel控制台
+      transport:
+        dashboard: localhost:8080
+      filter:
+        # 开启对Spring MVC端点的保护
+        enabled: true
+  # 后注册的bean将会覆盖前面注册的bean
+  main:
+    allow-bean-definition-overriding: true
+# mybatis plus配置
+mybatis-plus:
+  mapper-locations: classpath:mapper/*.xml
+  type-aliases-package: com.teacherblitz.entity
+# logging 配置
+logging:
+  level:
+    com.teacherblitz.mapper: debug
+
+feign:
+  sentinel:
+    # feign整合sentinel
+    enabled: true
+  client:
+    config:
+      # 想要调用微服务的名称
+      default:
+        loggerLevel: full
+ribbon:
+  eager-load:
+    enabled: true
+    clients: user-center
+# 通过HTTP暴露所有的端点
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+resttemplate:
+  sentinel:
+    # @关闭@SentinelRestTemplate注解
+    enabled: true
+
+# 阿里ahas配置
+#ahas.namespace: default
+#project.name: content-center
+#ahas.license:
+
+# rocketmq
+rocketmq:
+  name-server: localhost:9876
+  producer:
+    # TODO 小坑 必须指定group
+    group: test-group
