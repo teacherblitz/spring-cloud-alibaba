@@ -33,6 +33,14 @@ spring:
       filter:
         # 开启对Spring MVC端点的保护
         enabled: true
+    stream:
+      rocketmq:
+        binder:
+          name-server: localhost:9876
+      bindings:
+        output:
+          # 用来指定topic
+          destination: stream-test-topic
   # 后注册的bean将会覆盖前面注册的bean
   main:
     allow-bean-definition-overriding: true
@@ -44,6 +52,7 @@ mybatis-plus:
 logging:
   level:
     com.teacherblitz.mapper: debug
+    com.alibaba.nacos: error
 
 feign:
   sentinel:

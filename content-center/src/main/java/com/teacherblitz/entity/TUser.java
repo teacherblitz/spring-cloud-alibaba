@@ -1,9 +1,11 @@
 package com.teacherblitz.entity;
 
-import com.teacherblitz.entity.common.BaseEntity;
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableId;
+import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.experimental.Accessors;
+import lombok.NoArgsConstructor;
+import lombok.experimental.SuperBuilder;
 
 import java.time.LocalDateTime;
 
@@ -16,11 +18,15 @@ import java.time.LocalDateTime;
  * @since 2019-10-15
  */
 @Data
-@EqualsAndHashCode(callSuper = true)
-@Accessors(chain = true)
-public class TUser extends BaseEntity {
+@SuperBuilder
+@NoArgsConstructor
+@AllArgsConstructor
+public class TUser {
 
     private static final long serialVersionUID = 1L;
+
+    @TableId(value = "id",type = IdType.AUTO)//指定自增策略
+    private Integer id;
 
     /**
      * 用户昵称
@@ -41,6 +47,11 @@ public class TUser extends BaseEntity {
      * 积分
      */
     private Integer Bonus;
+
+    /**
+     * 原因
+     */
+    private String reason;
 
     /**
      * 创建时间

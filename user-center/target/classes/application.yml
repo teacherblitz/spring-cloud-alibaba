@@ -22,6 +22,15 @@ spring:
         # 元数据
         metadata:
           instance: c
+    stream:
+      rocketmq:
+        binder:
+          name-server: localhost:9876
+      bindings:
+        input:
+          destination: stream-test-topic
+          # 如果用的是rocketmq，这里一定要设置，如果是其它mq可留空
+          group: binder-group
   # 服务名
   application:
     name: user-center

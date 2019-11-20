@@ -11,6 +11,8 @@ import com.teacherblitz.sentinel.handler.FallbackExceptionHandler;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.cloud.stream.messaging.Source;
+import org.springframework.messaging.support.MessageBuilder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 
@@ -93,6 +95,22 @@ public class TestUserCenterController {
     @RequestMapping("test-rest-template-sentinel/{id}")
     public TUser testRestTemplateSentinel(@PathVariable Integer id){
         return this.restTemplate.getForObject("http://user-center/getUserInfo/{id}",TUser.class,id);
+    }
+
+    private final Source source;
+
+    /**
+     * 测试stream发送消息
+     * @return
+     */
+    @RequestMapping("/test-stream")
+    public String testStream(){
+        source.output().send(
+                MessageBuilder
+                        .withPayload("消息体")
+                        .build()
+        );
+        return "success";
     }
 
 }
