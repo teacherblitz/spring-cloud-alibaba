@@ -1,5 +1,11 @@
 # Spring-cloud-alibaba
 
+|  模块名称   | 端口 |
+|  ----  | ----  |
+| user-center  | 1000 |
+| content-center  | 2000 |
+| gateway  | 3000 |
+
 # Nacos 控制台下载地址
 - https://github.com/alibaba/Nacos/releases/
 
@@ -18,3 +24,14 @@
 - 注意：下载完成之后需改动：
 1. pom.xml->rocketmq.version为你当前使用的版本；
 2. application.properties->rocketmq控制台启动端口，和rocketmq的服务端地址
+
+# Spring Cloud Stream
+- 一个用于构建消息驱动的微服务框架
+- 知识点：
+1. 微服务集成了stream，然后stream的binder创建了两个binding（output(消息生产者)/input(消息消费者)）
+
+# Spring Cloud Gateway
+- 核心概念
+1. Route 路由
+2. Predicate 即Jdk8的Predicate，实现路由的匹配条件
+3. Filter 过滤器

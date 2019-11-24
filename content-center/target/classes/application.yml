@@ -1,6 +1,6 @@
 # tomcat端口
 server:
-  port: 7000
+  port: 2000
 
 
 spring:
@@ -35,12 +35,19 @@ spring:
         enabled: true
     stream:
       rocketmq:
+        # 目标绑定器：与消息中间件通信的组件
         binder:
           name-server: localhost:9876
+        # 目标绑定：连接应用程序与消息中间件的桥梁，用于消息的消费与生产，由binder创建
+        bindings:
+          output:
+            producer:
+              transactional: true
+              group: tx-add-bonus-group
       bindings:
         output:
           # 用来指定topic
-          destination: stream-test-topic
+          destination: add-bonus
   # 后注册的bean将会覆盖前面注册的bean
   main:
     allow-bean-definition-overriding: true
@@ -73,6 +80,9 @@ management:
     web:
       exposure:
         include: '*'
+  endpoint:
+    health:
+      show-details: always
 resttemplate:
   sentinel:
     # @关闭@SentinelRestTemplate注解
@@ -82,10 +92,3 @@ resttemplate:
 #ahas.namespace: default
 #project.name: content-center
 #ahas.license:
-
-# rocketmq
-rocketmq:
-  name-server: localhost:9876
-  producer:
-    # TODO 小坑 必须指定group
-    group: test-group

@@ -15,7 +15,8 @@ import org.springframework.web.bind.annotation.RestController;
  * @since 2019/11/14
  */
 @Slf4j
-@RestController("/admin/share")
+@RestController
+@RequestMapping("/admin/share")
 @RequiredArgsConstructor
 public class ContentCenterAdminController {
 

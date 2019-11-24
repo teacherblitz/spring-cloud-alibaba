@@ -1,6 +1,6 @@
 # tomcat端口
 server:
-  port: 9001
+  port: 1000
 
 spring:
   # 数据源
@@ -28,9 +28,9 @@ spring:
           name-server: localhost:9876
       bindings:
         input:
-          destination: stream-test-topic
+          destination: add-bonus
           # 如果用的是rocketmq，这里一定要设置，如果是其它mq可留空
-          group: binder-group
+          group: tx-add-bonus-group
   # 服务名
   application:
     name: user-center
@@ -48,7 +48,3 @@ mybatis-plus:
 logging:
   level:
     com.teacherblitz.mapper: debug
-
-# rocketmq
-rocketmq:
-  name-server: localhost:9876

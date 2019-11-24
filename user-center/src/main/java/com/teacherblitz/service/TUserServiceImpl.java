@@ -1,12 +1,13 @@
 package com.teacherblitz.service;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.teacherblitz.domain.dto.messaging.UserAddBonusMsgDTO;
 import com.teacherblitz.entity.TUser;
 import com.teacherblitz.mapper.TUserMapper;
-import com.teacherblitz.service.ITUserService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * <p>
@@ -26,5 +27,16 @@ public class TUserServiceImpl extends ServiceImpl<TUserMapper, TUser> implements
     @Override
     public TUser selectTUserById(Integer id) {
         return tUserMapper.selectById(id);
+    }
+
+    @Override
+    @Transactional(rollbackFor = Exception.class)
+    public void addBonus(UserAddBonusMsgDTO msgDTO) {
+        Integer userId = msgDTO.getUserId();
+        Integer bonus = msgDTO.getBonus();
+        TUser user = tUserMapper.selectById(userId);
+        user.setBonus(user.getBonus() + bonus);
+        // 添加积分
+        tUserMapper.updateById(user);
     }
 }

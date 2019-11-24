@@ -15,7 +15,8 @@ import org.springframework.web.bind.annotation.RestController;
  * @date 2019/10/19 15:07
  */
 @Slf4j
-@RestController("/share")
+@RestController
+@RequestMapping("/share")
 @RequiredArgsConstructor
 public class ContentCenterController {
 

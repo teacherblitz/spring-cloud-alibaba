@@ -1,5 +1,6 @@
 package com.teacherblitz.service.impl;
 
+import com.alibaba.fastjson.JSON;
 import com.teacherblitz.domain.dto.content.UserAuditDTO;
 import com.teacherblitz.domain.dto.messaging.UserAddBonusMsgDTO;
 import com.teacherblitz.domain.enums.AuditStatusEnum;
@@ -10,6 +11,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.rocketmq.spring.core.RocketMQTemplate;
 import org.apache.rocketmq.spring.support.RocketMQHeaders;
+import org.springframework.cloud.stream.messaging.Source;
 import org.springframework.messaging.support.MessageBuilder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -28,6 +30,7 @@ public class ShareServiceImpl implements ShareService {
 
     private final TUserMapper tUserMapper;
     private final RocketMQTemplate rocketMQTemplate;
+    private final Source source;
 
     @Override
     public TUser queryAuditById(Integer id, UserAuditDTO auditDto) {
@@ -39,33 +42,24 @@ public class ShareServiceImpl implements ShareService {
             throw new IllegalArgumentException("参数非法！该用户已审核通过或驳回！");
         }
 
-        if(AuditStatusEnum.PASS.equals(auditDto.getAuditStatusEnum())){
+        if(!AuditStatusEnum.PASS.equals(auditDto.getAuditStatusEnum())){
             String transactionId = UUID.randomUUID().toString();
-            this.rocketMQTemplate.sendMessageInTransaction(
-                    "tx-add-bonus-group",
-                    "add-bonus",
-                    MessageBuilder.withPayload(
+            this.source.output()
+                    .send(
+                        MessageBuilder.withPayload(
                             UserAddBonusMsgDTO.builder()
-                            .userId(user.getId())
-                            .bonus(50)
-                            .build()
-                    )
-                            .setHeader(RocketMQHeaders.TRANSACTION_ID, transactionId)
-                            .setHeader("user_id", user.getId())
-                            .build(),
-                    auditDto
-            );
+                                .userId(user.getId())
+                                .bonus(50)
+                                .build()
+                        )
+                        .setHeader(RocketMQHeaders.TRANSACTION_ID, transactionId)
+                        .setHeader("user_id", user.getId())
+                        .setHeader("dto", JSON.toJSONString(auditDto))
+                        .build()
+                    );
+        }else{
+            this.auditByIdInDB(id, auditDto);
         }
-
-        //TODO 省略rocketmq分布式消息
-        this.auditByIdInDB(id, auditDto);
-
-        // 为该用户增加积分
-        this.rocketMQTemplate.convertAndSend("add-bonus",
-                UserAddBonusMsgDTO.builder()
-                        .userId(user.getId())
-                        .bonus(50)
-                        .build());
         return user;
     }
 

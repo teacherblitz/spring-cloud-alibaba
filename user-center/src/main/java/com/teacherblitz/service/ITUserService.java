@@ -1,6 +1,7 @@
 package com.teacherblitz.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.teacherblitz.domain.dto.messaging.UserAddBonusMsgDTO;
 import com.teacherblitz.entity.TUser;
 
 /**
@@ -20,4 +21,9 @@ public interface ITUserService extends IService<TUser> {
      */
     TUser selectTUserById(Integer id);
 
+    /**
+     * 添加积分
+     * @param msgDTO
+     */
+    void addBonus(UserAddBonusMsgDTO msgDTO);
 }
