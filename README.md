@@ -35,3 +35,4 @@
 1. Route 路由
 2. Predicate 即Jdk8的Predicate，实现路由的匹配条件
 3. Filter 过滤器
+4. Spring Cloud Gateway监控：http://www.imooc.com/article/290822
