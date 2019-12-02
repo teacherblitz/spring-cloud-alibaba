@@ -8,6 +8,10 @@
 
 # Nacos 控制台下载地址
 - https://github.com/alibaba/Nacos/releases/
+- nacos配置服务器
+1. bootstrap.yml（云配置）
+3. 共享配置优先级：shared-dataids<ext-config<自动
+3. 配置最好采用MySQL存储
 
 # Sentinel 控制台下载地址
 - https://github.com/alibaba/Sentinel/releases

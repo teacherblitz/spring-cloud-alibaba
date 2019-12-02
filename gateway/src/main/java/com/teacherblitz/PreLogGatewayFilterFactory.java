@@ -30,7 +30,6 @@ public class PreLogGatewayFilterFactory
             ServerWebExchange modifiedExchange = exchange.mutate()
                 .request(modifiedRequest)
                 .build();
-
             return chain.filter(modifiedExchange);
         });
     }

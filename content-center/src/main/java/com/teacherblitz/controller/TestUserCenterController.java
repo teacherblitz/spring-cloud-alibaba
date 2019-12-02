@@ -11,6 +11,8 @@ import com.teacherblitz.sentinel.handler.FallbackExceptionHandler;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 
@@ -22,6 +24,7 @@ import java.util.List;
  * @since 2019/10/20 21:43
  */
 @Slf4j
+@RefreshScope
 @RestController
 @RequiredArgsConstructor
 public class TestUserCenterController {
@@ -95,4 +98,15 @@ public class TestUserCenterController {
         return this.restTemplate.getForObject("http://user-center/getUserInfo/{id}",TUser.class,id);
     }
 
+    @Value("${your.configuration}")
+    private String yourConfiguration;
+
+    /**
+     * nacos config
+     * @return
+     */
+    @RequestMapping("/getConfig")
+    public String getConfig(){
+        return this.yourConfiguration;
+    }
 }
