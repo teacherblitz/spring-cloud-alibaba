@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/cloud-admin/cloud-admin.iml" filepath="$PROJECT_DIR$/cloud-admin/cloud-admin.iml" />
       <module fileurl="file://$PROJECT_DIR$/content-center/content-center.iml" filepath="$PROJECT_DIR$/content-center/content-center.iml" />
       <module fileurl="file://$PROJECT_DIR$/gateway/gateway.iml" filepath="$PROJECT_DIR$/gateway/gateway.iml" />
       <module fileurl="file://$PROJECT_DIR$/spring-cloud-alibaba.iml" filepath="$PROJECT_DIR$/spring-cloud-alibaba.iml" />

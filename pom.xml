@@ -13,6 +13,7 @@
         <module>content-center</module>
         <module>content-center</module>
         <module>gateway</module>
+        <module>cloud-admin</module>
     </modules>
 
     <properties>
@@ -21,6 +22,7 @@
         <spring-cloud.version>Greenwich.SR3</spring-cloud.version>
         <spring-boot.version>2.1.8.RELEASE</spring-boot.version>
         <spring-cloud-alibaba.version>2.1.0.RELEASE</spring-cloud-alibaba.version>
+        <spring-boot-admin.version>2.1.5</spring-boot-admin.version>
         <mysql.version>8.0.17</mysql.version>
         <java.version>1.8</java.version>
     </properties>
@@ -85,6 +87,13 @@
                 <groupId>com.alibaba.cloud</groupId>
                 <artifactId>spring-cloud-alibaba-dependencies</artifactId>
                 <version>${spring-cloud-alibaba.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <dependency>
+                <groupId>de.codecentric</groupId>
+                <artifactId>spring-boot-admin-dependencies</artifactId>
+                <version>${spring-boot-admin.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>

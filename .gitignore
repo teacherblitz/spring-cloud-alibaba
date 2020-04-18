@@ -1,0 +1,8 @@
+/.idea/
+/gateway/target/classes/*
+/content-center/target/*
+/gateway/target/classes/*
+/user-center/target/classes/*
+/.idea/
+/.idea/libraries/Maven__de_codecentric_spring_boot_admin_server_2_1_5.xml
+/.idea/libraries/
