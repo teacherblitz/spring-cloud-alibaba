@@ -6,6 +6,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.cloud.stream.annotation.StreamListener;
 import org.springframework.cloud.stream.messaging.Sink;
+import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.stereotype.Service;
 
 /**
@@ -20,7 +21,7 @@ public class AddBonusStreamConsumer {
 
     private final ITUserService userService;
 
-    @StreamListener(Sink.INPUT)
+    @StreamListener("add-bonus-input")
     public void receive(UserAddBonusMsgDTO msgDTO){
         log.info("通过stream收到了消息：messageBody = {}", msgDTO);
         this.userService.addBonus(msgDTO);

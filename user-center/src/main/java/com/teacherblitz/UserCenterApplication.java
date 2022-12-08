@@ -1,5 +1,6 @@
 package com.teacherblitz;
 
+import com.teacherblitz.rocketmq.inter.ContentCenterInput;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -13,7 +14,7 @@ import org.springframework.cloud.stream.messaging.Sink;
  * @date 2019/9/25 20:51
  */
 @MapperScan("com.teacherblitz.mapper")
-@EnableBinding(Sink.class)
+@EnableBinding(ContentCenterInput.class)
 @SpringBootApplication
 public class UserCenterApplication {
 

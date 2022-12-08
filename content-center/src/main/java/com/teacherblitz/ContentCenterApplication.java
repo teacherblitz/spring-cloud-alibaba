@@ -1,6 +1,7 @@
 package com.teacherblitz;
 
 import com.alibaba.cloud.sentinel.annotation.SentinelRestTemplate;
+import com.teacherblitz.rocketmq.inter.MessageSource;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -17,7 +18,7 @@ import org.springframework.web.client.RestTemplate;
  * @since  2019/10/19 14:10
  */
 @MapperScan("com.teacherblitz.mapper")
-@EnableBinding(Source.class)
+@EnableBinding(MessageSource.class)
 @EnableFeignClients
 @SpringBootApplication
 public class ContentCenterApplication {

@@ -40,12 +40,12 @@ spring:
           name-server: localhost:9876
         # 目标绑定：连接应用程序与消息中间件的桥梁，用于消息的消费与生产，由binder创建
         bindings:
-          output:
+          add-bonus-output:
             producer:
               transactional: true
               group: tx-add-bonus-group
       bindings:
-        output:
+        add-bonus-output:
           # 用来指定topic
           destination: add-bonus
   # 后注册的bean将会覆盖前面注册的bean

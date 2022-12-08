@@ -27,9 +27,9 @@ spring:
         binder:
           name-server: localhost:9876
       bindings:
-        input:
+        add-bonus-input:
           destination: add-bonus
-          # 如果用的是rocketmq，这里一定要设置，如果是其它mq可留空
+          # 如果用的是rocketmq，这里一定要设置，如果是其它mq可留空,命名规则：组名+topic名称
           group: tx-add-bonus-group
   # 服务名
   application:
